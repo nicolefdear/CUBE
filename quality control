@@ -1,0 +1,23 @@
+#CUBE QC report: South Africa
+#Created by: Nicole Dear
+#Created on: 2019-04-03
+
+install.packages("tidyverse")
+install.packages("lubridate")
+install.packages("gmodels")
+install.packages("rmarkdown")
+library(tidyverse)
+library(lubridate)
+library(gmodels)
+library(rmarkdown)
+
+getwd()
+setwd("H:/CUBE/QC")
+
+sa<-read.csv("CUBEContraceptiveUse_DATA_2019-04-03_1240.csv")
+names(sa)
+sa_mo6<-sa[c(1:346)] #use vars from 6 month survey only
+
+table(sa_mo6$how_long_plan_use_curr)
+
+
