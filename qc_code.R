@@ -15,7 +15,7 @@ library(rmarkdown)
 setwd("H:/CUBE/QC")
 
 #load and reduce dataset
-sa<-read.csv("CUBEContraceptiveUse_DATA_2019-04-04_1231.csv")
+sa<-read.csv("CUBEContraceptiveUse_SA_2019-04-04_1231.csv")
 sa_mo6<-sa[c(1:346)]
 names(sa_mo6)
 
@@ -79,18 +79,18 @@ j<-subset(sa_mo6, sa_mo6$flagbaby==FALSE)
 print(j$pid)
 
 #criteria 5: calendar is blank at 1 month post exit visit
-sa_mo6$flagcalendarblank<-ifelse(sa_mo6$none___1==0&sa_mo6$month_injectable3___1==0&sa_mo6$month_injectable2___1==0&sa_mo6$rod_implant_jadelle___1==0&sa_mo6$rod_implant_implanon___1==0&sa_mo6$copper_iud___1==0&sa_mo6$hormonal_iud___1==0&sa_mo6$oral_pills___1==0&sa_mo6$male_condoms___1==0&sa_mo6$female_condoms___1==0&sa_mo6$emergency_contraception___1==0&sa_mo6$sterilization___1==0&sa_mo6$other___1==0,1,0)
+sa_mo6$flagcalendarblank<-ifelse((sa_mo6$none___1==0&sa_mo6$month_injectable3___1==0&sa_mo6$month_injectable2___1==0&sa_mo6$rod_implant_jadelle___1==0&sa_mo6$rod_implant_implanon___1==0&sa_mo6$copper_iud___1==0&sa_mo6$hormonal_iud___1==0&sa_mo6$oral_pills___1==0&sa_mo6$male_condoms___1==0&sa_mo6$female_condoms___1==0&sa_mo6$emergency_contraception___1==0&sa_mo6$sterilization___1==0&sa_mo6$other___1==0),1,0)
 k<-subset(sa_mo6, sa_mo6$flagcalendarblank==TRUE)
 print(k$pid)
 
 #criteria 6: calendar 'other'
-sa_mo6$flagcalendarother<-ifelse(sa_mo6$other___1==1|sa_mo6$other___2==1|sa_mo6$other___3==1|sa_mo6$other___4==1|sa_mo6$other___5==1|sa_mo6$other___6==1|sa_mo6$other___7==1|sa_mo6$other___8==1,1,0)
+sa_mo6$flagcalendarother<-ifelse((sa_mo6$other___1==1|sa_mo6$other___2==1|sa_mo6$other___3==1|sa_mo6$other___4==1|sa_mo6$other___5==1|sa_mo6$other___6==1|sa_mo6$other___7==1|sa_mo6$other___8==1),1,0)
 l<-subset(sa_mo6, sa_mo6$flagcalendarother==TRUE)
 print(l$pid)
 
 #criteria 7: no reason for method discontinuation given
 sa_mo6_discont<-subset(sa_mo6, sa_mo6$any_method_discont==1)
-sa_mo6_discont$flagnoreason<-ifelse(sa_mo6_discont$reason_for_discont___1==0&sa_mo6_discont$reason_for_discont___2==0&sa_mo6_discont$reason_for_discont___3==0&sa_mo6_discont$reason_for_discont___4==0&sa_mo6_discont$reason_for_discont___5==0&sa_mo6_discont$reason_for_discont___6==0&sa_mo6_discont$reason_for_discont___7==0&sa_mo6_discont$reason_for_discont___8==0&sa_mo6_discont$reason_for_discont___9==0&sa_mo6_discont$reason_for_discont___10==0&sa_mo6_discont$reason_for_discont___11==0&sa_mo6_discont$reason_for_discont___12==0&sa_mo6_discont$reason_for_discont___13==0&sa_mo6_discont$reason_for_discont___14==0&sa_mo6_discont$reason_for_discont___15==0&sa_mo6_discont$reason_for_discont___16==0&sa_mo6_discont$reason_for_discont___17==0&sa_mo6_discont$reason_for_discont___18==0&sa_mo6_discont$reason_for_discont___19==0&sa_mo6_discont$reason_for_discont___20==0&sa_mo6_discont$reason_for_discont___21==0&sa_mo6_discont$reason_for_discont___22==0&sa_mo6_discont$reason_for_discont___23==0&sa_mo6_discont$reason_for_discont___24==0&sa_mo6_discont$reason_for_discont___25==0&sa_mo6_discont$reason_for_discont___26==0&sa_mo6_discont$reason_for_discont___99==0,1,0)
-m<-subset(sa_mo6_discont, sa_mo6_discont$flagreason==TRUE)
+sa_mo6_discont$flag<-ifelse((sa_mo6_discont$reason_for_discont___1==1|sa_mo6_discont$reason_for_discont___2==1|sa_mo6_discont$reason_for_discont___3==1|sa_mo6_discont$reason_for_discont___4==1|sa_mo6_discont$reason_for_discont___5==1|sa_mo6_discont$reason_for_discont___6==1|sa_mo6_discont$reason_for_discont___7==1|sa_mo6_discont$reason_for_discont___8==1|sa_mo6_discont$reason_for_discont___9==1|sa_mo6_discont$reason_for_discont___10==1|sa_mo6_discont$reason_for_discont___11==1|sa_mo6_discont$reason_for_discont___12==1|sa_mo6_discont$reason_for_discont___13==1|sa_mo6_discont$reason_for_discont___14==1|sa_mo6_discont$reason_for_discont___15==1|sa_mo6_discont$reason_for_discont___16==1|sa_mo6_discont$reason_for_discont___17==1|sa_mo6_discont$reason_for_discont___18==1|sa_mo6_discont$reason_for_discont___19==1|sa_mo6_discont$reason_for_discont___20==1|sa_mo6_discont$reason_for_discont___21==1|sa_mo6_discont$reason_for_discont___22==1|sa_mo6_discont$reason_for_discont___23==1|sa_mo6_discont$reason_for_discont___24==1|sa_mo6_discont$reason_for_discont___25==1|sa_mo6_discont$reason_for_discont___99==1),1,0)
+m<-subset(sa_mo6_discont, sa_mo6_discont$flag==FALSE)
 print(m$pid)
 
